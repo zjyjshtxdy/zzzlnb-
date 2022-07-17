@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 app = Flask(__name__)
@@ -22,13 +23,13 @@ def ini_prog():
         print(f'cwd being {cwd}')
         print('exist')
         return
-    with open('config.json', 'r') as f:
+    with open('config.json','r',encoding = "utf-8") as f:
         config = f.read()
     config = json.loads(config)
     bookName = config['bookName']
     wkdir = config['wkdir']
     port = config['port']
-    with open(bookName+'.json', 'r') as f:
+    with open(bookName+'.json', 'r',encoding = "utf-8") as f:
         info = f.readlines()
     if os.path.exists(wkdir):
         pass
@@ -41,7 +42,7 @@ def ini_book(bookn):
     global bookName
     bookName = bookn
     bookS = None
-    with open(bookName+'.json', 'r') as f:
+    with open(bookName+'.json', 'r',encoding = "utf-8" ) as f:
         bookS = f.readlines()
     cmd = f'SELECT * FROM sqlite_master WHERE type="table" AND name = "{bookName}";'
     cursorObj.execute(cmd)
